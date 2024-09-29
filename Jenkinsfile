@@ -1,6 +1,9 @@
 pipeline {
-    
+
     agent any
+    tools {
+        maven 'Apache Maven 3.9.6 ' 
+    }
 
     environment {
         DOCKER_REGISTRY = 'iamtripathi'
