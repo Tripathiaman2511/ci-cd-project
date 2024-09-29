@@ -1,21 +1,17 @@
 pipeline {
-    
     agent any
+
     environment {
         DOCKER_REGISTRY = 'iamtripathi'
     }
 
     stages {
-        stage('Build'){
-             docker {
-                image 'maven:3.5.0'
-            }
-        
+        stage('Build') {
             steps {
-                sh 'mvn clean install'
-            }  
+                sh 'mvn clean package'
+            }
         }
-        
+
         stage('Docker Build') {
             steps {
                 script {
@@ -24,6 +20,13 @@ pipeline {
                     }
                 }
             }
+        }
+
+    }
+
+    post {
+        always {
+            cleanWs()
         }
     }
 }
